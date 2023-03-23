@@ -1,7 +1,7 @@
 ﻿using System;
 using CoMute.Abstractions;
 using CoMute.Abstractions.Models;
-using CoMute.DataProvider.CosmosDb;
+using CoMute.DataProvider;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,22 +36,15 @@ public class Startup
                 .AllowAnyHeader());
         });
 
-        // Cosmos
-        var cosmosDbSettiongs = new CosmosDbSettings();
-        Configuration.Bind(nameof(CosmosDbSettings), cosmosDbSettiongs);
-        services.AddSingleton(cosmosDbSettiongs);
+        //SQL db
+        services.AddDbContextFactory<DataContext>(options =>
+            options.UseSqlServer(
+                Configuration.GetConnectionString("ConnectionString"),
+                x => x.MigrationsAssembly("CoMute.API")
+            )
+        );
 
-        services.AddDbContextFactory<DataContext>((IServiceProvider sp, DbContextOptionsBuilder opts) =>
-        {
-            opts.UseCosmos(cosmosDbSettiongs.ConnectionString, cosmosDbSettiongs.Database, (dbOptions) =>
-            {
-                dbOptions.ConnectionMode(ConnectionMode.Direct);
-            });
-
-
-        });
-
-        services.AddScoped<IPortalDataProvider, PortalDataProvider>();
+        services.AddTransient<IPortalDataProvider, PortalDataProvider>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IPortalDataProvider dataProvider)

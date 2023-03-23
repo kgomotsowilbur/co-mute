@@ -1,18 +1,14 @@
 {
   "dependencies": {
-    "secrets1": {
-      "type": "secrets.user"
-    },
-    "mssql1": {
-      "secretStore": "LocalSecretsFile",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/comute/databases/CoMute",
-      "type": "mssql.azure",
-      "connectionId": "ConnectionStrings:CoMute",
-      "dynamicId": null
-    },
     "cosmosdb1": {
       "ignored": "true",
       "type": "cosmosdb"
+    },
+    "mssql1": {
+      "secretStore": null,
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:ConnectionString",
+      "dynamicId": null
     }
   }
 }

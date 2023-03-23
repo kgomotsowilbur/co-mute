@@ -2,7 +2,7 @@
 using CoMute.Abstractions.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoMute.DataProvider.CosmosDb;
+namespace CoMute.DataProvider;
 
 public partial class PortalDataProvider
 {

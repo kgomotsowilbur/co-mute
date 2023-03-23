@@ -3,18 +3,16 @@ using CoMute.Abstractions;
 using CoMute.Abstractions.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoMute.DataProvider.CosmosDb
+namespace CoMute.DataProvider
 {
 	public partial class PortalDataProvider : IPortalDataProvider
     {
-		public PortalDataProvider(IDbContextFactory<DataContext> factory, CosmosDbSettings cosmosDbSettings)
+		public PortalDataProvider(IDbContextFactory<DataContext> factory)
 		{
 			this._contextFactory = factory;
-			this._cosmosDbSettings = cosmosDbSettings;
 		}
 
 		protected readonly IDbContextFactory<DataContext> _contextFactory;
-		protected readonly CosmosDbSettings _cosmosDbSettings;
 
 		public void Initialize()
 		{

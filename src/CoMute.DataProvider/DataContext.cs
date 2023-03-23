@@ -2,7 +2,7 @@
 using CoMute.Abstractions.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoMute.DataProvider.CosmosDb;
+namespace CoMute.DataProvider;
 
 public class DataContext : DbContext
 {
@@ -11,7 +11,6 @@ public class DataContext : DbContext
 	public DataContext(DbContextOptions<DataContext> options)
 		: base(options)
 	{
-		// this.ChangeTracker.AutoDetectChangesEnabled = false;
 	}
 
 	public DbSet<CarPoolOpportunity> CarPoolOpportunities { get; set; }
@@ -19,23 +18,25 @@ public class DataContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+		base.OnModelCreating(modelBuilder);
+
 		#region [ User ]
 		var userModel = modelBuilder.Entity<User>();
-		userModel.ToContainer("User")
-            .HasNoDiscriminator()
-            .HasKey(w => w.Id);
+		userModel.ToTable("User")
+			.HasDiscriminator<int>("Type")
+			.HasValue<User>(0);
 
-		userModel.HasMany(a => a.CarPoolOpportunities)
+        userModel.HasMany(a => a.CarPoolOpportunities)
 			.WithOne()
 			.HasForeignKey(t => t.UserId);
 		#endregion
 		#region [ CarPoolOpportunity ]
-		var fundModel = modelBuilder.Entity<CarPoolOpportunity>();
-		fundModel.ToContainer("CarPoolOpportunities")
-            .HasNoDiscriminator()
-            .HasKey(f => f.Id);
-		#endregion
-	}
+		var carPoolOpportunityModel = modelBuilder.Entity<CarPoolOpportunity>();
+		carPoolOpportunityModel.ToTable("CarPoolOpportunities")
+			.HasDiscriminator<int>("Type")
+			.HasValue<CarPoolOpportunity>(1);
+        #endregion
+    }
 
 #if DEBUG
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
