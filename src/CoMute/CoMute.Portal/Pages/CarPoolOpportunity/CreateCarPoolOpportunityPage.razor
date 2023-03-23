@@ -1,0 +1,120 @@
+﻿@page "/newfund/{fundManagerId:guid}"
+@inherits AeverPortal.Portal.Pages.FundsNewPageBase
+
+<MudGrid>
+    <MudItem xs="12" sm="6" lg="6">
+        @*<div >
+            <MudImage ObjectFit="@ObjectFit.Contain" Fluid="true" Height="580" Src="Images/registration.jpg" Alt="Örebro Slott" Elevation="25" Class="rounded-lg" />
+        </div>*@
+        <MudCard Elevation="5">
+            <MudCardMedia Image="Images/registration.jpg" Height="372" />
+            <MudCardContent>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="6">
+        <EditForm Model="@Entity" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12" sm="12" lg="12">
+                    <MudCard Elevation="25">
+                        <MudCardContent>
+                            <MudTextField Label="Name" HelperText="Please provide a name of the funding company"
+                                          @bind-Value="Entity.Name" For="@(() => Entity.Name)" />
+                            <MudTextField Label="Website" Class="mt-3" HelperText="Please provide your companies website"
+                                          @bind-Value="Entity.WebsiteUrl" For="@(() => Entity.WebsiteUrl)" />
+                            <MudTextField Label="Short Blurb" HelperText="Please provide your companies short blurb"
+                                          @bind-Value="Entity.ShortBlurb" For="@(() => Entity.ShortBlurb)" />
+                            <MudTextField Label="Overview" Class="mt-3" HelperText="Please provide an Overview for your company"
+                                          @bind-Value="Entity.FundOverview" For="@(() => Entity.FundOverview)" />
+                            <MudTextField Label="Type" HelperText="Please provide the type of fund your company provides"
+                                          @bind-Value="Entity.Type" For="@(() => Entity.Type)" />
+                           <!--<MudDatePicker Label="Incoporation Date" DateFormat="dd.MM.yyyy"
+                                          @bind-Date="Entity.IncoporationDate" For="@(() => Entity.IncoporationDate)" />--> 
+                            <MudTextField Label="Investment Strategy" Class="mt-3" HelperText="Please provide your companies investment strategy"
+                                          @bind-Value="Entity.InvestmentStrategy" For="@(() => Entity.InvestmentStrategy)" />
+                            <MudTextField Label="Value Creation" HelperText="Please provide your companies value creation"
+                                          @bind-Value="Entity.ValueCreation" For="@(() => Entity.ValueCreation)" />
+                            <MudTextField Label="Investment Process" Class="mt-3" HelperText="Please provide your companies investment process"
+                                          @bind-Value="Entity.InvestmentProcess" For="@(() => Entity.InvestmentProcess)" />
+                            <MudTextField Label="Value Proposition" HelperText="Please provide your companies value proposition"
+                                          @bind-Value="Entity.ValueProposition" For="@(() => Entity.ValueProposition)" />
+                            <MudTextField Label="Market Opportunity" Class="mt-3" HelperText="Please provide your companies market opportunity"
+                                          @bind-Value="Entity.MarketOpportunity" For="@(() => Entity.MarketOpportunity)" />
+                            <MudTextField Label="Enterprice Value" Class="mt-3" HelperText="Please provide your companies enterprice value"
+                                          @bind-Value="Entity.EnterpriceValue" For="@(() => Entity.EnterpriceValue)" />
+                            <MudTextField Label="Investment Team Overview" HelperText="Please provide your companies investment team overview"
+                                          @bind-Value="Entity.InvestmentTeamOverview" For="@(() => Entity.InvestmentTeamOverview)" />
+                            <MudTextField Label="Impact Summary" Class="mt-3" HelperText="Please provide your companies impact summary"
+                                          @bind-Value="Entity.ImpactSummary" For="@(() => Entity.ImpactSummary)" />
+                            <MudTextField Label="Impact Thesis" HelperText="Please provide your companies impact thesis"
+                                          @bind-Value="Entity.ImpactThesis" For="@(() => Entity.ImpactThesis)" />
+                            <MudText>Physical Address</MudText>
+                            <MudTextField Label="Street" Class="mt-3" HelperText="Please enter the name of the Street"
+                                          @bind-Value="Entity.PhysicalAddress.Street" For="@(() => Entity.PhysicalAddress.Street)" />
+                            <MudTextField Label="Surburb" Class="mt-3" HelperText="Please enter the name of the Surburb"
+                                          @bind-Value="Entity.PhysicalAddress.Surburb" For="@(() => Entity.PhysicalAddress.Surburb)" />
+                            <MudTextField Label="City" Class="mt-3" HelperText="Please enter the name of the City"
+                                          @bind-Value="Entity.PhysicalAddress.City" For="@(() => Entity.PhysicalAddress.City)" />
+                            <MudTextField Label="Postal Code" Class="mt-3" HelperText="Please enter the Postal Code"
+                                          @bind-Value="Entity.PhysicalAddress.PostalCode" For="@(() => Entity.PhysicalAddress.PostalCode)" />
+                            <MudTextField Label="Telephone" Class="mt-3" HelperText="Please enter the Telephone"
+                                          @bind-Value="Entity.PhysicalAddress.Telephone" For="@(() => Entity.PhysicalAddress.Telephone)" />
+                            <MudText>Registered Address</MudText>
+                            <MudTextField Label="Street" Class="mt-3" HelperText="Please enter the name of the Street"
+                                          @bind-Value="Entity.RegisteredAddress.Street" For="@(() => Entity.RegisteredAddress.Street)" />
+                            <MudTextField Label="Surburb" Class="mt-3" HelperText="Please enter the name of the Surburb"
+                                          @bind-Value="Entity.RegisteredAddress.Surburb" For="@(() => Entity.RegisteredAddress.Surburb)" />
+                            <MudTextField Label="City" Class="mt-3" HelperText="Please enter the name of the City"
+                                          @bind-Value="Entity.RegisteredAddress.City" For="@(() => Entity.RegisteredAddress.City)" />
+                            <MudTextField Label="Postal Code" Class="mt-3" HelperText="Please enter the Postal Code"
+                                          @bind-Value="Entity.RegisteredAddress.PostalCode" For="@(() => Entity.RegisteredAddress.PostalCode)" />
+                            <MudTextField Label="Telephone" Class="mt-3" HelperText="Please enter the Telephone"
+                                          @bind-Value="Entity.RegisteredAddress.Telephone" For="@(() => Entity.RegisteredAddress.Telephone)" />
+                            <MudText>Investment Term</MudText>
+                            <MudTextField Label="Qualifying Investors" Class="mt-3" HelperText="Please provide your companies qualifying investors"
+                                          @bind-Value="Entity.InvestmentTerm.QualifyingInvestors" For="@(() => Entity.InvestmentTerm.QualifyingInvestors)" />
+                            <MudTextField Label="Minimum Subscription" Class="mt-3" HelperText="Please provide your companies minimum subscription"
+                                          @bind-Value="Entity.InvestmentTerm.MinimumSubscription" For="@(() => Entity.InvestmentTerm.MinimumSubscription)" />
+                            <MudTextField Label="Fund Term" Class="mt-3" HelperText="Please provide your companies fund term"
+                                          @bind-Value="Entity.InvestmentTerm.FundTerm" For="@(() => Entity.InvestmentTerm.FundTerm)" />
+                            <MudTextField Label="Investment Size" Class="mt-3" HelperText="Please provide your companies investment size"
+                                          @bind-Value="Entity.InvestmentTerm.InvestmentSize" For="@(() => Entity.InvestmentTerm.InvestmentSize)" />
+                            <MudTextField Label="Individual Net" Class="mt-3" HelperText="Please provide your companies individual net"
+                                          @bind-Value="Entity.InvestmentTerm.IndividualNet" For="@(() => Entity.InvestmentTerm.IndividualNet)" />
+                            <MudTextField Label="Prefered Return" Class="mt-3" HelperText="Please provide your companies prefered return"
+                                          @bind-Value="Entity.InvestmentTerm.PreferedReturn" For="@(() => Entity.InvestmentTerm.PreferedReturn)" />
+                            <MudTextField Label="Tax Benefit" Class="mt-3" HelperText="Please provide your companies tax benefit"
+                                          @bind-Value="Entity.InvestmentTerm.TaxBenefit" For="@(() => Entity.InvestmentTerm.TaxBenefit)" />
+                            <MudTextField Label="Management Fees" Class="mt-3" HelperText="Please provide your companies management fees"
+                                          @bind-Value="Entity.InvestmentTerm.ManagementFees" For="@(() => Entity.InvestmentTerm.ManagementFees)" />
+                           <!--<MudDatePicker Label="Next Closing Date" DateFormat="dd.MM.yyyy"
+                                          @bind-Date="Entity.InvestmentTerm.NextClosingDate" For="@(() => Entity.InvestmentTerm.NextClosingDate)" />--> 
+                            <MudText>Investment</MudText>
+                            <MudTextField Label="Investment Value" Class="mt-3" HelperText="Please provide your companies investment value"
+                                          @bind-Value="Entity.Investment.InvestmentValue" For="@(() => Entity.Investment.InvestmentValue)" />
+                            <MudTextField Label="Investment Criteria" Class="mt-3" HelperText="Please provide your companies investment criteria"
+                                          @bind-Value="Entity.Investment.InvestmentCriteria" For="@(() => Entity.Investment.InvestmentCriteria)" />
+                           <!-- <MudSelect @bind-Value="Entity.Investment.Geographies" Margin="Margin.Dense" T="string" Label="Geographies" Variant="Variant.Text">
+                              <MudSelectItem Value="@Entity.Investment.Geographies.US" />
+                                <MudSelectItem Value="@Entity.Investment.Geographies.Canada" />
+                                <MudSelectItem Value="@Entity.Investment.Geographies.Europe" />
+                                <MudSelectItem Value="@Entity.Investment.Geographies.Asia" />
+                                <MudSelectItem Value="@Entity.Investment.Geographies.LatinAmerica" />
+                                <MudSelectItem Value="@Entity.Investment.Geographies.Africa" />
+                                <MudSelectItem Value="@Entity.Investment.Geographies.Oceania" /> 
+                            </MudSelect>   --> 
+                            <MudTextField Label="Sectors" Class="mt-3" HelperText="Please provide your companies sectors"
+                                          @bind-Value="Entity.Investment.Sectors" For="@(() => Entity.Investment.Sectors)" />
+                            <MudTextField Label="Investment Type" Class="mt-3" HelperText="Please provide your companies investment type"
+                                          @bind-Value="Entity.Investment.InvestmentType" For="@(() => Entity.Investment.InvestmentType)" />
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </MudItem>
+</MudGrid>

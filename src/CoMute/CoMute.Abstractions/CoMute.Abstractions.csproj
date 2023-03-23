@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Models\" />
+    <None Remove="System.ComponentModel.Annotations" />
+    <None Remove="Models\Setting\" />
+    <None Remove="Models\Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Setting\" />
+    <Folder Include="Models\Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+  
+</Project>

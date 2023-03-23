@@ -1,0 +1,191 @@
+﻿@page "/fundManager/{fundManagerId:guid}/details"
+@inherits FundManagerDetailsPageBase
+
+<MudCard Elevation="25" Style="position: relative;">
+    <MudCardMedia Image="Images/blue-stars.jpg" Height="205" />
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@FundManager.Name</MudText>
+        <MudText Typo="Typo.body2">@FundManager.PhysicalAddress.Surburb, @FundManager.PhysicalAddress.City</MudText>
+        <MudText Typo="Typo.body2">@FundManager.Overview</MudText>
+        <br />
+        <MudStack Row="true">
+        @foreach(var fund in FundManager.Funds){
+            @if(fund.Status == "active") {
+            <MudCardActions>
+                <MudPaper Style="background-color: dodgerblue; padding: 2px;">
+                <MudPaper Style="background-color: white; padding: 2px;" >
+                    <MudButton Variant="Variant.Filled" @onclick="() => ChangeFund(fund)" Color="Color.Primary">@fund.Name</MudButton>
+                </MudPaper>
+                </MudPaper>
+            </MudCardActions>
+            } else {
+            <MudCardActions>
+                <MudPaper Style="background-color: lightgrey; padding: 2px;">
+                <MudPaper Style="background-color: white; padding: 2px;">
+                <MudButton Variant="Variant.Filled" @onclick="() => ChangeFund(fund)" Color="Color.Primary">@fund.Name</MudButton>
+                </MudPaper>
+                </MudPaper>
+            </MudCardActions>
+            }
+        }
+        <MudSpacer/>
+            <MudCardActions>
+                <MudButton Variant="Variant.Outlined" Href="@($"/newfund/{FundManager.Id}/")" Color="Color.Primary">Add Fund</MudButton>
+            </MudCardActions>
+        </MudStack>
+    </MudCardContent>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px;">
+           <MudImage Fluid="true" ObjectFit="@ObjectFit.Fill" Src="Images/city-Cool.jpg" Elevation="25" Style="border-color: white; border-width: thick; width: 30vw; height: 30vh; border-radius: 100%"/>
+           <MudLink Href="@($"/fundManager/{FundManager.Id}/")"><MudIcon Icon="@Icons.Filled.Info" Size="Size.Large" Style="position: absolute; bottom: 0%; right: 0%; transform: translate(-50%, -50%); color: black; background: white; border-radius: 100%;"/></MudLink>
+        </div>
+</MudCard>
+<MudTabs Elevation="5" Rounded="true"  PanelClass="pa-6" Class="mt-3" Color="@Color.Primary">
+    <MudTabPanel Text="Fund Overview and Strategy" Icon="@Icons.Filled.List" ToolTip="Fund Details">
+       <MudPaper style="padding:10px; margin-top: 3vh; border: hidden; height: fit-content;" Width="100%">
+            <h1>Overview</h1>
+            <MudPaper Height="30px" Width="100%" Outlined="true" style="padding-left: 10px; border: hidden;">
+                <MudText><b>Fund Manager:</b> @FundManager.Name</MudText>
+            </MudPaper>
+            <MudGrid Class="mb-4">
+                <MudItem xs="12" sm="12" md="9" lg="9"> 
+                    <MudStack Row="true">
+                        <MudPaper Height="155px" Width="50%" style="position: relative; margin-top: 20px; padding-left: 10px;">
+                            <MudText><b>Physical Office</b></MudText>
+                            <MudText>@FundManager.PhysicalAddress.Street</MudText>
+                            <MudText>@FundManager.PhysicalAddress.Surburb</MudText>
+                            <MudText>@FundManager.PhysicalAddress.City</MudText>
+                            <MudText>@FundManager.PhysicalAddress.PostalCode</MudText>
+                            <MudText>@FundManager.PhysicalAddress.Telephone</MudText>
+                            <MudIcon @onclick="() => FundManagerPhysicalPopover(FundManager)" Style="cursor: pointer; position:absolute; right: 2%; bottom: 10%" Icon="@Icons.Filled.EditLocationAlt"></MudIcon>
+                        </MudPaper>
+                        <MudPaper Height="155px" Width="50%" Style="position: relative; margin-top: 20px; padding-left: 10px;">
+                            <MudText><b>Registered Office</b></MudText>
+                            <MudText>@FundManager.RegisteredAddress.Street</MudText>
+                            <MudText>@FundManager.RegisteredAddress.Surburb</MudText>
+                            <MudText>@FundManager.RegisteredAddress.City</MudText>
+                            <MudText>@FundManager.RegisteredAddress.PostalCode</MudText>
+                            <MudText>@FundManager.RegisteredAddress.Telephone</MudText>
+                            <MudIcon @onclick="() => FundManagerRegisteredPopover(FundManager)" Style="cursor: pointer; position:absolute; right: 2%; bottom: 10%" Icon="@Icons.Filled.EditLocationAlt"></MudIcon>
+                        </MudPaper>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="12" md="3" lg="3">
+                    <MudPaper Height="155px" Class="pb-3" Style="margin-top: 20px; padding: 10px; padding-top: 0px; overflow-y: scroll; overflow-x: hidden;">
+                        <MudText><b>About Us</b></MudText>   
+                        <MudGrid>
+                            <MudItem xs="12">
+                                <MudGrid Justify="Justify.FlexStart">
+                                        @foreach (var image in FundManager.AboutUs)
+                                        {                  
+                                            <MudItem xs="12" sm="6">
+                                                <MudPaper Class="d-flex flex-column align-center justify-center mud-width-full">
+                                                    <MudImage style="width: 100%" Src="@image.ImageUrl" Elevation="25" Class="rounded-lg" />
+                                                </MudPaper>
+                                            </MudItem>
+                                        }
+                                </MudGrid>
+                            </MudItem>
+                        </MudGrid>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+                    <!--FundManager Physical Address Popover-->
+                    <MudPopover Style="Padding: 20px;" Open="@FundManagerPhysicalIsOpen" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter">
+                        <EditForm Model="@Address" OnValidSubmit="Submit">
+                            <DataAnnotationsValidator />
+                            <MudTextField Label="Street" HelperText="Please enter your street"
+                                          @bind-Value="Address.Street" For="@(() => Address.Street)" />
+                            <MudTextField Label="Surburb" HelperText="Please enter your surburb"
+                                          @bind-Value="Address.Surburb" For="@(() => Address.Surburb)" />
+                            <MudTextField Label="City" Class="mt-3" HelperText="Please enter your city"
+                                          @bind-Value="Address.City" For="@(() => Address.City)" />
+                            <MudTextField Label="Postal Code" Class="mt-3" HelperText="Please enter your postal code"
+                                          @bind-Value="Address.PostalCode" For="@(() => Address.PostalCode)" />
+                            <MudTextField Label="Telephone" Class="mt-3" HelperText="Please enter your telephone number"
+                                          @bind-Value="Address.Telephone" For="@(() => Address.Telephone)" />
+                            <MudButton OnClick="Cancel">Cancel</MudButton>
+                            <MudButton Color="Color.Primary" ButtonType="ButtonType.Submit">Save</MudButton>
+                        </EditForm>     
+                    </MudPopover>
+                    <!--FundManager Registered Address Popover-->
+                    <MudPopover Style="Padding: 20px;" Open="@FundManagerRegisteredIsOpen" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter">
+                        <EditForm Model="@Address" OnValidSubmit="Submit">
+                            <DataAnnotationsValidator /> 
+                            <MudTextField Label="Street" HelperText="Please enter your street"
+                                          @bind-Value="Address.Street" For="@(() => Address.Street)" />
+                            <MudTextField Label="Surburb" HelperText="Please enter your surburb"
+                                          @bind-Value="Address.Surburb" For="@(() => Address.Surburb)" />
+                            <MudTextField Label="City" Class="mt-3" HelperText="Please enter your city"
+                                          @bind-Value="Address.City" For="@(() => Address.City)" />
+                            <MudTextField Label="Postal Code" Class="mt-3" HelperText="Please enter your postal code"
+                                          @bind-Value="Address.PostalCode" For="@(() => Address.PostalCode)" />
+                            <MudTextField Label="Telephone" Class="mt-3" HelperText="Please enter your telephone number"
+                                          @bind-Value="Address.Telephone" For="@(() => Address.Telephone)" />
+                            <MudButton OnClick="Cancel">Cancel</MudButton>
+                            <MudButton Color="Color.Primary" ButtonType="ButtonType.Submit">Save</MudButton>
+                        </EditForm>
+                    </MudPopover>
+                    <!--Fund Physical Address Popover-->
+                    <MudPopover Style="Padding: 20px;" Open="@FundPhysicalIsOpen" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter">
+                        <EditForm Model="@Address" OnValidSubmit="Submit">
+                            <DataAnnotationsValidator />
+                            <MudTextField Label="Street" HelperText="Please enter your street"
+                                          @bind-Value="Address.Street" For="@(() => Address.Street)" />
+                            <MudTextField Label="Surburb" HelperText="Please enter your surburb"
+                                          @bind-Value="Address.Surburb" For="@(() => Address.Surburb)" />
+                            <MudTextField Label="City" Class="mt-3" HelperText="Please enter your city"
+                                          @bind-Value="Address.City" For="@(() => Address.City)" />
+                            <MudTextField Label="Postal Code" Class="mt-3" HelperText="Please enter your postal code"
+                                          @bind-Value="Address.PostalCode" For="@(() => Address.PostalCode)" />
+                            <MudTextField Label="Telephone" Class="mt-3" HelperText="Please enter your telephone number"
+                                          @bind-Value="Address.Telephone" For="@(() => Address.Telephone)" />
+                            <MudButton OnClick="Cancel">Cancel</MudButton>
+                            <MudButton Color="Color.Primary" ButtonType="ButtonType.Submit">Save</MudButton>
+                        </EditForm>
+                    </MudPopover>
+                    <!--Fund Registered Address Popover-->
+                    <MudPopover Style="Padding: 20px;" Open="@FundRegisteredIsOpen" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter">
+                         <EditForm Model="@Address" OnValidSubmit="Submit">
+                            <DataAnnotationsValidator />
+                            <MudTextField Label="Street" HelperText="Please enter your street"
+                                          @bind-Value="Address.Street" For="@(() => Address.Street)" />
+                            <MudTextField Label="Surburb" HelperText="Please enter your surburb"
+                                          @bind-Value="Address.Surburb" For="@(() => Address.Surburb)" />
+                            <MudTextField Label="City" Class="mt-3" HelperText="Please enter your city"
+                                          @bind-Value="Address.City" For="@(() => Address.City)" />
+                            <MudTextField Label="Postal Code" Class="mt-3" HelperText="Please enter your postal code"
+                                          @bind-Value="Address.PostalCode" For="@(() => Address.PostalCode)" />
+                            <MudTextField Label="Telephone" Class="mt-3" HelperText="Please enter your telephone number"
+                                          @bind-Value="Address.Telephone" For="@(() => Address.Telephone)" />
+                            <MudButton OnClick="Cancel">Cancel</MudButton>
+                            <MudButton Color="Color.Primary" ButtonType="ButtonType.Submit">Save</MudButton>
+                         </EditForm>
+                    </MudPopover>      
+                    @if(Fund != null) {
+                    <MudPaper Height="30px" Width="100%" Outlined="true" Style="margin-top: 20px; padding-left: 10px; border: hidden;">
+                        <MudText><b>Fund:</b> @Fund.Name</MudText>
+                    </MudPaper>
+                    <MudStack Row="true">
+                        <MudPaper Height="155px" Width="50%" style="position: relative; margin-top: 20px; padding-left: 10px;">
+                            <MudText><b>Physical Office</b></MudText>
+                            <MudText>@Fund.PhysicalAddress.Street</MudText>
+                            <MudText>@Fund.PhysicalAddress.Surburb</MudText>
+                            <MudText>@Fund.PhysicalAddress.City</MudText>
+                            <MudText>@Fund.PhysicalAddress.PostalCode</MudText>
+                            <MudText>@Fund.PhysicalAddress.Telephone</MudText>
+                            <MudIcon @onclick="() => FundPhysicalPopover(Fund)" Style="cursor: pointer; position:absolute; right: 2%; bottom: 10%" Icon="@Icons.Filled.EditLocationAlt"></MudIcon>
+                        </MudPaper>
+                        <MudPaper Height="155px" Width="50%" style="position: relative; margin-top: 20px; padding-left: 10px;">
+                            <MudText><b>Registered Office</b></MudText>
+                            <MudText>@Fund.RegisteredAddress.Street</MudText>
+                            <MudText>@Fund.RegisteredAddress.Surburb</MudText>
+                            <MudText>@Fund.RegisteredAddress.City</MudText>
+                            <MudText>@Fund.RegisteredAddress.PostalCode</MudText>
+                            <MudText>@Fund.RegisteredAddress.Telephone</MudText>
+                            <MudIcon @onclick="() => FundRegisteredPopover(Fund)" Style="cursor: pointer; position:absolute; right: 2%; bottom: 10%" Icon="@Icons.Filled.EditLocationAlt"></MudIcon>
+                        </MudPaper>
+                    </MudStack> 
+                    }
+                </MudPaper>
+    </MudTabPanel>
+</MudTabs>

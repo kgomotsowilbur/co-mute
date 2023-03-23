@@ -1,0 +1,27 @@
+﻿@page "/signUp"
+@inherits SignUpPageBase
+
+<EditForm Model="@User" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Name" HelperText="Please enter the CarPoolOpportunity Manager name"
+                                  @bind-Value="User.Name" For="@(() => User.Name)" />
+                    <MudTextField Label="Surname" HelperText="Please enter the Surname"
+                                  @bind-Value="User.Surname" For="@(() => User.Surname)" />
+                    <MudTextField Label="Phone" Class="mt-3" HelperText="Please enter the Phone"
+                                  @bind-Value="User.Phone" For="@(() => User.Phone)" />
+                    <MudTextField Label="Email" Class="mt-3" HelperText="Please enter the Email"
+                                  @bind-Value="User.Email" For="@(() => User.Email)" />
+                    <MudTextField Label="Password" Class="mt-3" HelperText="Please enter the Password"
+                                  @bind-Value="User.Password" For="@(() => User.Password)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Submit Details</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>

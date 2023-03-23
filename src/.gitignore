@@ -1,0 +1,17 @@
+.DS_Store
+.vs
+Aever-Portal-Dev/obj/Debug
+Aever-Portal-Dev/obj
+Aever-Portal-Dev/bin/Debug
+AeverPortal.Abstractions/bin
+AeverPortal.Abstractions/bin
+AeverPortal.Abstractions/obj/Debug
+AeverPortal.Portal/bin
+AeverPortal.Portal/obj/Debug
+AeverPortal.Portal/obj
+AeverPortal.Data/obj
+AeverPortal.FrontEndAPI/obj
+AeverPortal.DataProvider.CosmosDb/obj
+AeverPortal.DataProvider.CosmosDb/bin
+AeverPortal.FrontEndAPI/bin
+AeverPortal.Abstractions/obj

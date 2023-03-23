@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace CoMute.Abstractions.Models;
+
+public class CarPoolOpportunity:BaseEntity
+{
+    public DateTime DepartureTime { get; set; }
+    public DateTime ArrivalTime { get; set; }
+    public string Origin { get; set; }
+    public string DaysAvailable { get; set; }
+    public string Destination { get; set; }
+    public string AvailableSeats { get; set; }
+    public string Owner { get; set; }
+    public string Notes { get; set; }
+    public Guid UserId { get; set; }
+}

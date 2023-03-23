@@ -1,0 +1,45 @@
+﻿@page "/newFundManager"
+@inherits AeverPortal.Portal.Pages.NewFundManagerPageBase
+
+<EditForm Model="@FundManager" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Name" HelperText="Please enter the Fund Manager name"
+                                  @bind-Value="FundManager.Name" For="@(() => FundManager.Name)" />
+                    <MudTextField Label="Short Blurb" HelperText="Please enter the Short Blurb"
+                                  @bind-Value="FundManager.ShortBlurb" For="@(() => FundManager.ShortBlurb)" />
+                    <MudTextField Label="Overview" Class="mt-3" HelperText="Please enter the Overview"
+                                  @bind-Value="FundManager.Overview" For="@(() => FundManager.Overview)" />
+                    <MudText>Physical Address</MudText>
+                    <MudTextField Label="Street" Class="mt-3" HelperText="Please enter the name of the Street"
+                                  @bind-Value="FundManager.PhysicalAddress.Street" For="@(() => FundManager.PhysicalAddress.Street)" />
+                    <MudTextField Label="Surburb" Class="mt-3" HelperText="Please enter the name of the Surburb"
+                                  @bind-Value="FundManager.PhysicalAddress.Surburb" For="@(() => FundManager.PhysicalAddress.Surburb)" />
+                    <MudTextField Label="City" Class="mt-3" HelperText="Please enter the name of the City"
+                                  @bind-Value="FundManager.PhysicalAddress.City" For="@(() => FundManager.PhysicalAddress.City)" />
+                    <MudTextField Label="Postal Code" Class="mt-3" HelperText="Please enter the Postal Code"
+                                  @bind-Value="FundManager.PhysicalAddress.PostalCode" For="@(() => FundManager.PhysicalAddress.PostalCode)" />
+                    <MudTextField Label="Telephone" Class="mt-3" HelperText="Please enter the Telephone"
+                                  @bind-Value="FundManager.PhysicalAddress.Telephone" For="@(() => FundManager.PhysicalAddress.Telephone)" />
+                    <MudText>Registered Address</MudText>
+                    <MudTextField Label="Street" Class="mt-3" HelperText="Please enter the name of the Street"
+                                  @bind-Value="FundManager.RegisteredAddress.Street" For="@(() => FundManager.RegisteredAddress.Street)" />
+                    <MudTextField Label="Surburb" Class="mt-3" HelperText="Please enter the name of the Surburb"
+                                  @bind-Value="FundManager.RegisteredAddress.Surburb" For="@(() => FundManager.RegisteredAddress.Surburb)" />
+                    <MudTextField Label="City" Class="mt-3" HelperText="Please enter the name of the City"
+                                  @bind-Value="FundManager.RegisteredAddress.City" For="@(() => FundManager.RegisteredAddress.City)" />
+                    <MudTextField Label="Postal Code" Class="mt-3" HelperText="Please enter the Postal Code"
+                                  @bind-Value="FundManager.RegisteredAddress.PostalCode" For="@(() => FundManager.RegisteredAddress.PostalCode)" />
+                    <MudTextField Label="Telephone" Class="mt-3" HelperText="Please enter the Telephone"
+                                  @bind-Value="FundManager.RegisteredAddress.Telephone" For="@(() => FundManager.RegisteredAddress.Telephone)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Submit Details</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>

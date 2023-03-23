@@ -1,0 +1,78 @@
+﻿@page "/funds"
+<h3>All funds</h3>
+<br />
+@inherits AeverPortal.Portal.Pages.FundsListPageBase
+
+<MudGrid>
+    <MudItem xs="12">
+        <MudPaper Class="pa-4">
+            <EditForm Model="@Fund" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+                <MudGrid>
+                    <MudItem xs="12" sm="4">
+                        <MudTextField T="string" Label="Name" @bind-Value="Fund.Name" For="@(() => Fund.Name)"/>
+                    </MudItem>  
+                    <MudItem xs="12" sm="4">
+                        <MudTextField T="string" Label="Type" @bind-Value="Fund.Type" For="@(() => Fund.Type)"/>
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudTextField T="string" Label="Status" @bind-Value="Fund.Status" For="@(() => Fund.Status)"/>
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudTextField T="string" Label="Investment Strategy" @bind-Value="Fund.InvestmentStrategy" For="@(() => Fund.InvestmentStrategy)"/>
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudTextField T="string" Label="Value Creation" @bind-Value="Fund.ValueCreation" For="@(() => Fund.ValueCreation)"/>
+                    </MudItem>
+                </MudGrid>
+                <div class="d-flex align-center justify-space-between">
+                <!--<MudSwitch T="bool" Label="Save Query" @bind-Checked="SaveQuery" For="@(() => SaveQuery)" /> -->                
+                    <MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Filter</MudButton>
+                    </MudCardActions>
+                </div>
+            </EditForm>   
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+<br />
+<MudTable Items="@AllFunds" Hover="true"> 
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Website</MudTh>
+        <MudTh>Short Blurb</MudTh>
+        <MudTh>Fund Overview</MudTh>
+        <MudTh>Type</MudTh>
+        <MudTh>Status</MudTh>
+        <MudTh>Incoporation Date</MudTh>
+        <MudTh>Investment Strategy</MudTh>
+        <MudTh>Value Creation</MudTh>
+        <MudTh>Investment Process</MudTh>
+        <MudTh>Value Proposition</MudTh>
+        <MudTh>Market Opportunity</MudTh>
+        <MudTh>Enterprice Value</MudTh>
+        <MudTh>Investment Team Overview</MudTh>
+        <MudTh>Impact Summary</MudTh>
+        <MudTh>Impact Thesis</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">
+            <MudLink Href="@($"/funds/{context.Id}/details")">@context.Name</MudLink>
+        </MudTd>
+        <MudTd DataLabel="WebsiteUrl">@context.WebsiteUrl</MudTd>
+        <MudTd DataLabel="ShortBlurb">@context.ShortBlurb</MudTd>
+        <MudTd DataLabel="FundOverview">@context.FundOverview</MudTd>
+        <MudTd DataLabel="Type">@context.Type</MudTd>
+        <MudTd DataLabel="Status">@context.Status</MudTd>
+        <MudTd DataLabel="IncoporationDate">@context.IncoporationDate</MudTd>
+        <MudTd DataLabel="InvestmentStrategy">@context.InvestmentStrategy</MudTd>
+        <MudTd DataLabel="ValueCreation">@context.ValueCreation</MudTd>
+        <MudTd DataLabel="InvestmentProcess">@context.InvestmentProcess</MudTd>
+        <MudTd DataLabel="ValueProposition">@context.ValueProposition</MudTd>
+        <MudTd DataLabel="MarketOpportunity">@context.MarketOpportunity</MudTd>
+        <MudTd DataLabel="EnterpriceValue">@context.EnterpriceValue</MudTd>
+        <MudTd DataLabel="InvestmentTeamOverview">@context.InvestmentTeamOverview</MudTd>
+        <MudTd DataLabel="ImpactSummary">@context.ImpactSummary</MudTd>
+        <MudTd DataLabel="ImpactThesis">@context.ImpactThesis</MudTd>
+    </RowTemplate>
+</MudTable>

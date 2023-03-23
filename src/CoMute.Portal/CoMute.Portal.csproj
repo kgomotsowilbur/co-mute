@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.6" PrivateAssets="all" />
+    <PackageReference Include="MudBlazor" Version="6.0.14" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="1.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="NuGet.DependencyResolver.Core" Version="6.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.1.0" />
+    <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="6.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="MudBlazor" />
+    <None Remove="MudBlazor.ThemeManager" />
+    <None Remove="Services\" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Services\Interfaces\" />
+    <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="NuGet.DependencyResolver.Core" />
+    <None Remove="Helpers\" />
+    <None Remove="Microsoft.Extensions.Http" />
+    <None Remove="Toolbelt.Blazor.HttpClientInterceptor" />
+    <None Remove="Microsoft.Authentication.WebAssembly.Msal" />
+    <None Remove="Pages\Users\" />
+    <None Remove="Pages\CarPoolOpportunities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoMute.Abstractions\CoMute.Abstractions.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\Images\" />
+  </ItemGroup>
+</Project>

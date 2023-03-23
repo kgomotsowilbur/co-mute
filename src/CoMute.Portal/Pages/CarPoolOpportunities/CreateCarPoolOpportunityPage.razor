@@ -1,0 +1,37 @@
+﻿@page "/createCarPoolOpportunity/{carPoolOpportunityId:guid}"
+@inherits CreateCarPoolOpportunityPageBase
+
+<MudGrid>
+    <MudItem xs="12" sm="6">
+        <EditForm Model="@CarPoolOpportunity" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12" sm="12" lg="12">
+                    <MudCard Elevation="25">
+                        <MudCardContent>
+                            <MudTextField Label="Departure Time" HelperText="Please provide a Departure Time"
+                                          @bind-Value="CarPoolOpportunity.DepartureTime" For="@(() => CarPoolOpportunity.DepartureTime)" />
+                            <MudTextField Label="ArrivalTime" Class="mt-3" HelperText="Please provide Arrival Time"
+                                          @bind-Value="CarPoolOpportunity.ArrivalTime" For="@(() => CarPoolOpportunity.ArrivalTime)" />
+                            <MudTextField Label="Origin" HelperText="Please provide your Origin"
+                                          @bind-Value="CarPoolOpportunity.Origin" For="@(() => CarPoolOpportunity.Origin)" />
+                            <MudTextField Label="Days Available" Class="mt-3" HelperText="Please provide Days Available"
+                                          @bind-Value="CarPoolOpportunity.DaysAvailable" For="@(() => CarPoolOpportunity.DaysAvailable)" />
+                            <MudTextField Label="Destination" HelperText="Please provide the Destination"
+                                          @bind-Value="CarPoolOpportunity.Destination" For="@(() => CarPoolOpportunity.Destination)" />
+                            <MudTextField Label="Available Seats" Class="mt-3" HelperText="Please provide Available Seats"
+                                          @bind-Value="CarPoolOpportunity.AvailableSeats" For="@(() => CarPoolOpportunity.AvailableSeats)" />
+                            <MudTextField Label="Owner" HelperText="Please provide Owner"
+                                          @bind-Value="CarPoolOpportunity.Owner" For="@(() => CarPoolOpportunity.Owner)" />
+                            <MudTextField Label="Notes" Class="mt-3" HelperText="Please provide Notes"
+                                          @bind-Value="CarPoolOpportunity.Notes" For="@(() => CarPoolOpportunity.Notes)" />
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </MudItem>
+</MudGrid>

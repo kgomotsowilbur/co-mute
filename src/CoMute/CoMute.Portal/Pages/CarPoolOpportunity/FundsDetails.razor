@@ -1,0 +1,30 @@
+﻿@page "/funds/{fundId:guid}/"
+@inherits AeverPortal.Portal.Pages.FundsDetailsBase
+
+<MudCard Elevation="25">
+    <MudCardMedia Image="Images/funds-didier.jpg" Height="200" />
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@Fund.Name</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Outlined" Color="Color.Primary">Edit</MudButton>
+    </MudCardActions>
+</MudCard>
+<MudTabs Elevation="5" Rounded="true"  PanelClass="pa-6" Class="mt-3" Color="@Color.Primary">
+    <MudTabPanel Text="Fund Target" Icon="@Icons.Filled.ThumbUp" ToolTip="Fund target">
+        <MudText Typo="Typo.caption">Impact Areas</MudText>
+    </MudTabPanel>
+    <MudTabPanel Text="Fund Owner" Icon="@Icons.Filled.Person" ToolTip="Owner of the fund">
+        <MudCard Elevation="25">
+            <MudCardMedia Image="Images/blue-stars.jpg" Height="200" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h5">@FundOwner.Name</MudText>
+                    <MudText Typo="Typo.body2">@FundOwner.ShortBlurb</MudText>
+                    <MudText Typo="Typo.body2">@FundOwner.Overview</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Outlined" Href="@($"/fundManager/{FundOwner.Id}/details")" Color="Color.Primary">View Owner</MudButton>
+                </MudCardActions>   
+        </MudCard>
+    </MudTabPanel>
+</MudTabs>
