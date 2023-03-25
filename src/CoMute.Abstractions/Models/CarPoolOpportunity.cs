@@ -16,5 +16,5 @@ public class CarPoolOpportunity : BaseEntity
     public string AvailableSeats { get; set; }
     public string Owner { get; set; }
     public string Notes { get; set; }
-    public Guid UserId { get; set; }
+    public string UserId { get; set; }
 }

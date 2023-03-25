@@ -14,7 +14,7 @@ public class CreateCarPoolOpportunityPageBase : ComponentBase
 	}
     #region [ Fields ]
     [Parameter]
-    public Guid UserId { get; set; }
+    public string UserId { get; set; }
 
     [Inject]
     public ICarPoolOpportunityDataService CarPoolOpportunityDataService { get; set; }

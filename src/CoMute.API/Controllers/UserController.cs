@@ -1,10 +1,12 @@
 ﻿using System;
 using CoMute.Abstractions;
 using CoMute.Abstractions.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoMute.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class UserController : PortalControllerBase
@@ -15,7 +17,7 @@ public class UserController : PortalControllerBase
     }
 
     [HttpGet("{userId}")]
-    public async Task<User> GetUser([FromRoute] Guid userId)
+    public async Task<Users> GetUser([FromRoute] string userId)
     {
         try
         {
@@ -30,7 +32,7 @@ public class UserController : PortalControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<User>> GetAllUsers()
+    public async Task<IEnumerable<Users>> GetAllUsers()
     {
         try
         {
@@ -45,7 +47,7 @@ public class UserController : PortalControllerBase
     }
 
     [HttpPost]
-    public async Task AddUser([FromBody] User user)
+    public async Task AddUser([FromBody] Users user)
     {
         try
         {
@@ -79,7 +81,7 @@ public class UserController : PortalControllerBase
     }
 
     [HttpGet("{userId}/userDetails")]
-    public async Task<User> GetUserDetails([FromRoute] Guid userId)
+    public async Task<Users> GetUserDetails([FromRoute] string userId)
     {
         try
         {

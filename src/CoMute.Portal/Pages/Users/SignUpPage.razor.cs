@@ -25,7 +25,7 @@ public class SignUpPageBase : ComponentBase
     [Inject]
     public NavigationManager Navigation { get; set; }
 
-    public User User { get; set; }
+    public Abstractions.Models.Users User { get; set; }
     #endregion
 
     public async Task OnValidSubmit(EditContext context)

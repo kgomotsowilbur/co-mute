@@ -4,6 +4,12 @@
       "ignored": "true",
       "type": "cosmosdb"
     },
+    "identityapp1": {
+      "secretStore": "LocalSecretsFile",
+      "type": "identityapp.secretStore",
+      "connectionId": "AzureAD:ClientSecret",
+      "dynamicId": null
+    },
     "mssql1": {
       "secretStore": null,
       "type": "mssql.local",

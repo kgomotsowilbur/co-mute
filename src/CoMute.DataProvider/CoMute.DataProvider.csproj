@@ -18,6 +18,8 @@
     <None Remove="PortalDataProvider.CarPoolOpportunities" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" Version="6.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="6.0.8" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.30.0" />

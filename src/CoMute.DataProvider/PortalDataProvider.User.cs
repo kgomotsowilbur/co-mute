@@ -6,7 +6,7 @@ namespace CoMute.DataProvider;
 
 public partial class PortalDataProvider
 {
-    public async Task<IEnumerable<User>> GetAllUsers()
+    public async Task<IEnumerable<Users>> GetAllUsers()
     {
         using (var context = await _contextFactory.CreateDbContextAsync())
         {
@@ -16,7 +16,7 @@ public partial class PortalDataProvider
         }
     }
 
-    public async Task<User> GetUser(Guid userId)
+    public async Task<Users> GetUser(string userId)
     {
         using (var context = await _contextFactory.CreateDbContextAsync())
         {
@@ -25,7 +25,7 @@ public partial class PortalDataProvider
         }
     }
 
-    public async Task<User> GetUserDetails(Guid userId)
+    public async Task<Users> GetUserDetails(string userId)
     {
         using (var context = await _contextFactory.CreateDbContextAsync())
         {

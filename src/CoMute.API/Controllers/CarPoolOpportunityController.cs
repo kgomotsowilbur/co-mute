@@ -1,10 +1,12 @@
 ﻿using System;
 using CoMute.Abstractions;
 using CoMute.Abstractions.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoMute.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class CarPoolOpportunityController : PortalControllerBase

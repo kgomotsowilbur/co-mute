@@ -25,22 +25,22 @@ public class UserDataService : IUserDataService
     protected string ApiPath { get; } = "/user";
     #endregion
 
-    public Task<IEnumerable<User>> GetAllUsers()
+    public Task<IEnumerable<Users>> GetAllUsers()
     {
-        return this.GetJsonResults<IEnumerable<User>>(this.ApiPath);
+        return this.GetJsonResults<IEnumerable<Users>>(this.ApiPath);
     }
 
-    public Task<User> GetUser(Guid userId)
+    public Task<Users> GetUser(Guid userId)
     {
-        return this.GetJsonResults<User>($"{this.ApiPath}/{userId}");
+        return this.GetJsonResults<Users>($"{this.ApiPath}/{userId}");
     }
 
-    public Task<User> GetUserDetails(Guid userId)
+    public Task<Users> GetUserDetails(Guid userId)
     {
-        return this.GetJsonResults<User>($"{this.ApiPath}/{userId}/userDetails");
+        return this.GetJsonResults<Users>($"{this.ApiPath}/{userId}/userDetails");
     }
 
-    public async Task AddUser(User user)
+    public async Task AddUser(Users user)
     {
         string userJson = JsonConvert.SerializeObject(user, Formatting.Indented);
 

@@ -14,9 +14,9 @@ public interface IPortalDataProvider
     Task Update<T>(T entity);
 
     #region [ User ]
-    Task<User> GetUser(Guid userId);
-    Task<IEnumerable<User>> GetAllUsers();
-    Task<User> GetUserDetails(Guid userId);
+    Task<Users> GetUser(string userId);
+    Task<IEnumerable<Users>> GetAllUsers();
+    Task<Users> GetUserDetails(string userId);
     #endregion
 
     #region [ CarPoolOpportunities ]
